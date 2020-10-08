@@ -8,11 +8,24 @@ class Message(models.Model):
 
     from_user = models.ForeignKey(
         to=User,
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE,
+        related_name="sent_messages"
     )
 
     to_user = models.ForeignKey(
         to=User,
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE,
+        related_name="received_messages"
     )
 
+
+class MessageImage(models.Model):
+    message = models.ForeignKey(
+        to=Message,
+        on_delete=models.CASCADE,
+        related_name="message_image"
+    )
+
+    image = models.ImageField(
+        upload_to="messages/"
+    )
