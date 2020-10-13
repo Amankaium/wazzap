@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block page %}
+
+    <h1>{{ chat.name }}</h1>
+    {% for message in chat.message.all  %}
+        <div>
+            <i>{{ message.from_user }}</i>
+            <br>
+            <b>{{ message.date }}</b>
+            <br>
+            <h2>{{ message.text }}</h2> 
+            <hr>
+            <br>
+        </div>
+
+    {% endfor %}
+{% endblock %}

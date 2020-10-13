@@ -9,9 +9,10 @@ class MessageImageInline(admin.TabularInline):
 
 @admin.register(Message)
 class MessageAdmin(admin.ModelAdmin):
-    list_display = ["date", "from_user", "to_user"]
+    list_display = ["date", "from_user", "to_user", "chat"]
+    list_editable = ["chat"]
     inlines = [MessageImageInline]
 
-
+admin.site.register(Chat)
 
 
