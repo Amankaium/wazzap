@@ -32,3 +32,7 @@ def add_message(request):
         return redirect(f'/chat/{ chat_id }#end')
     
     return redirect(homepage)
+
+
+def google_map(request):
+    return render(request, "map.html")
