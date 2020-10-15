@@ -16,6 +16,11 @@ try:
 except:
     pass
 
+try:
+    from .google_map import key
+except:
+    pass
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 

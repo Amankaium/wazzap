@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from django.db.models import Q
 from django.core.mail import send_mail
+from wazzap.settings import key
+# from django.conf import key
 from .models import *
 
 
@@ -47,4 +49,7 @@ def add_message(request):
 
 
 def google_map(request):
-    return render(request, "map.html")
+    return render(request, "map.html", {"key": key})
+
+def two_gis(request):
+    return render(request, "two_gis.html")
