@@ -1,3 +1,4 @@
+from datetime import datetime
 from django.shortcuts import render, redirect
 from django.db.models import Q
 from django.core.mail import send_mail
@@ -54,6 +55,29 @@ def google_map(request):
 def two_gis(request):
     return render(request, "two_gis.html")
 
+def filtered_messages(request, day, month, year):
+    from_date = datetime(year, month, day)
+    messages = Message.objects.filter(date__gte=from_date)
+    return render(request, "all.html", {"messages": messages})
+
 
 def all_messages(request):
-    return render(request, "all.html", {"messages": Message.objects.all()})
+    if "from" in request.GET:
+        from_date = request.GET["from"]
+        # messages = Message.objects.filter(date__gte=from_date)
+        from_date = datetime.strptime(from_date, "%Y-%m-%dT%H:%M")
+        return redirect(
+            filtered_messages,
+            day=from_date.day,
+            month=from_date.month,
+            year=from_date.year
+        )
+    else:
+        messages = Message.objects.all()
+
+    return render(request, "all.html", {"messages": messages})
+
+
+def new_messages(request):
+    messages = Message.objects.order_by("-date")
+    return render(request, "all.html", {"messages": messages})

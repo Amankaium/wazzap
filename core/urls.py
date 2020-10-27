@@ -8,4 +8,6 @@ urlpatterns = [
     path("map/", google_map, name="map"),
     path("2gis/", two_gis, name="2gis"),
     path("all/", all_messages, name="all"),
+    path("all/<int:day>-<int:month>-<int:year>/", filtered_messages),
+    path("all/new/", new_messages, name="new"),
 ]
