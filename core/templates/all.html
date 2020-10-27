@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block page %}
+    <h1>Все сообщения</h1>
+    {% for message in messages %}
+        <hr>
+        <div>{{ message.text }}</div>
+    {% endfor %}
+
+{% endblock %}

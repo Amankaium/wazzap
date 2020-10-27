@@ -53,3 +53,7 @@ def google_map(request):
 
 def two_gis(request):
     return render(request, "two_gis.html")
+
+
+def all_messages(request):
+    return render(request, "all.html", {"messages": Message.objects.all()})
