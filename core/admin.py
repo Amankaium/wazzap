@@ -14,5 +14,5 @@ class MessageAdmin(admin.ModelAdmin):
     inlines = [MessageImageInline]
 
 admin.site.register(Chat)
-
-
+admin.site.register(Parent)
+admin.site.register(Child)

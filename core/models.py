@@ -46,3 +46,11 @@ class MessageImage(models.Model):
     image = models.ImageField(
         upload_to="messages/"
     )
+
+
+class Parent(models.Model):
+    test_attr = models.CharField(max_length=10)
+
+
+class Child(Parent):
+    test_attr_2 = models.IntegerField()
