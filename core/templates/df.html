@@ -1,12 +1,12 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 
 {% block page %}
+
     <form>
-        <input type="datetime-local" name="from">
-        <input type="datetime-local" name="to">
-        <button name="filter">Применить</button>
+        {{ messages.form.as_p }}
+        <button>Применить</button>
     </form>
-    {% for message in messages %}
+    {% for message in messages.qs %}
         <hr>
         <div>
             <i>{{ message.date|date:"d.m.Y H:i" }}</i>
@@ -14,5 +14,4 @@
             {{ message.text }}
         </div> 
     {% endfor %}
-
 {% endblock %}

@@ -5,6 +5,7 @@ from django.core.mail import send_mail
 from wazzap.settings import key
 # from django.conf import key
 from .models import *
+from .filters import MessageFilter
 
 
 def homepage(request):
@@ -62,7 +63,7 @@ def filtered_messages(request, day, month, year):
 
 
 def all_messages(request):
-    if "from" in request.GET:
+    if "filter" in request.GET:
         from_date = request.GET["from"]
         # messages = Message.objects.filter(date__gte=from_date)
         from_date = datetime.strptime(from_date, "%Y-%m-%dT%H:%M")
@@ -81,3 +82,12 @@ def all_messages(request):
 def new_messages(request):
     messages = Message.objects.order_by("-date")
     return render(request, "all.html", {"messages": messages})
+
+
+def df_messages(request):
+    f_messages = MessageFilter(
+        request.GET,
+        queryset=Message.objects.all()
+    )
+
+    return render(request, "df.html", {"messages": f_messages})

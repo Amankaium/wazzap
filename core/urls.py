@@ -9,5 +9,6 @@ urlpatterns = [
     path("2gis/", two_gis, name="2gis"),
     path("all/", all_messages, name="all"),
     path("all/<int:day>-<int:month>-<int:year>/", filtered_messages),
+    path("all/df/", df_messages, name="df-all"),
     path("all/new/", new_messages, name="new"),
 ]
