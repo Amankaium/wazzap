@@ -35,15 +35,15 @@ def add_message(request):
         )
         message.save()
         
-        users = User.objects.filter(sent_messages__chat=chat).exclude(id=request.user.id)
-        emails = [user.email for user in users] # if user != request.user]
+        # users = User.objects.filter(sent_messages__chat=chat).exclude(id=request.user.id)
+        # emails = [user.email for user in users] # if user != request.user]
 
-        send_mail(
-            subject="Вам пришло новое сообщение",
-            message=f"Текст сообщения: {text}\nОт пользователя: {request.user.username}",
-            from_email=request.user.email,
-            recipient_list=emails
-        )
+        # send_mail(
+        #     subject="Вам пришло новое сообщение",
+        #     message=f"Текст сообщения: {text}\nОт пользователя: {request.user.username}",
+        #     from_email=request.user.email,
+        #     recipient_list=emails
+        # )
 
         return redirect(f'/chat/{ chat_id }#end')
     

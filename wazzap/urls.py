@@ -17,12 +17,15 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from userprofile.views import ProfileView
+from userprofile.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("", include('core.urls')),
-    path("profile/", ProfileView.as_view())
+    path("profile/<int:pk>/", ProfileView.as_view()),
+    path("profile/<int:pk>/edit/", ProfileUpdateView.as_view()),
+    path("profile/form/", ProfileFormView.as_view()),
+
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

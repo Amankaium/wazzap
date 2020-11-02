@@ -5,6 +5,11 @@ from django.contrib.auth.models import User
 class Chat(models.Model):
     name = models.CharField(max_length=255)
     description = models.TextField(null=True, blank=True)
+    users = models.ManyToManyField(
+        to=User,
+        blank=True,
+        verbose_name="участники"
+    )
 
     def __str__(self):
         return self.name
