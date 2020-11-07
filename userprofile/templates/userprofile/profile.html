@@ -3,4 +3,8 @@
 {% block page %}
     <h1>profile page</h1>
     {{ object }}
+    <hr>
+    <a href="{% url 'profile-edit' object.pk %}">
+        Редактировать
+    </a>
 {% endblock %}
