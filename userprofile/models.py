@@ -11,8 +11,18 @@ class Profile(models.Model):
         verbose_name='Пользователь',
     )
 
-    vk = models.CharField(
-        max_length=255,
-        null=True,
-        blank=True
+    photo = models.ImageField(
+        upload_to="profile/",
+        null=True, blank=True
     )
+
+
+class ProfileSocialLink(models.Model):
+    profile = models.ForeignKey(
+        to=Profile,
+        on_delete=models.CASCADE,
+        related_name="social_link"
+    )
+
+    name = models.CharField(max_length=55)
+    link = models.CharField(max_length=55)

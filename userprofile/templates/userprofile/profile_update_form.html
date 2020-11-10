@@ -2,10 +2,42 @@
 
 
 {% block page %}
-    <form method="post">
+    <form id="form-container" method="post">
         {% csrf_token %}
         {{ form.as_p }}
         {{ user_form.as_p }}
+        <br>
+        {{ social_link_formset.management_form }}
+        {% for social_link_form in social_link_formset %}
+            <div class="social-link-form">
+                {{ social_link_form.as_p }}
+                <br>
+            </div>
+        {% endfor %}
+        <button id="add-form" type="button">Add Another Bird</button>
         <input type="submit" value="Update">
+        
     </form>
+    <script>
+        let birdForm = document.querySelectorAll(".social-link-form")
+        let container = document.querySelector("#form-container")
+        let addButton = document.querySelector("#add-form")
+        let totalForms = document.querySelector("#id_form-TOTAL_FORMS")
+
+        let formNum = birdForm.length-1
+        addButton.addEventListener('click', addForm)
+
+        function addForm(e){
+            e.preventDefault()
+
+            let newForm = birdForm[birdForm.length - 1].cloneNode(true)
+            let formRegex = RegExp(`form-(\\d){1}-`,'g')
+
+            formNum++
+            newForm.innerHTML = newForm.innerHTML.replace(formRegex, `form-${formNum}-`)
+            container.insertBefore(newForm, addButton)
+            
+            totalForms.setAttribute('value', `${formNum+1}`)
+        }
+    </script>
 {% endblock %}
