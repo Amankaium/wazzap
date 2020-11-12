@@ -1,5 +1,8 @@
 from datetime import datetime
 from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
 from django.core.mail import send_mail
 from wazzap.settings import key
@@ -8,6 +11,11 @@ from .models import *
 from .filters import MessageFilter
 
 
+class MyLoginRequiredMixin(LoginRequiredMixin):
+    login_url = reverse_lazy("account_login")
+
+
+@login_required(login_url=reverse_lazy("account_login"))
 def homepage(request):
     # messages = Message.objects.filter(to_user=request.user)
     chats = Chat.objects.filter(

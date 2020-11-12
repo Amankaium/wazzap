@@ -21,6 +21,7 @@ from userprofile.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path("accounts/", include("allauth.urls")),
     path("", include('core.urls')),
     path("profile/<int:pk>/", ProfileView.as_view(), name="profile"),
     path("profile/<int:pk>/edit/", ProfileUpdateView.as_view(), name="profile-edit"),
